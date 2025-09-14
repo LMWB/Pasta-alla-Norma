@@ -4139,9 +4139,9 @@
 			(uuid "52fc3013-d4c5-45fa-94d3-32cb2d5ffba5")
 		)
 		(embedded_fonts no)
-		(model "/home/lukas/FreeCAD/RGB-Ball-Fassung.step"
+		(model "/home/lukas/work/git/LMWB/Pasta-alla-Norma/CAD/RGB-Ball-Fassung.step"
 			(offset
-				(xyz 10 0 -31.6)
+				(xyz 10 0 -31.4)
 			)
 			(scale
 				(xyz 1 1 1)
