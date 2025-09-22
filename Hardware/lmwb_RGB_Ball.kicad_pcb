@@ -4140,6 +4140,30 @@
 		)
 		(embedded_fonts no)
 		(model "/home/lukas/work/git/LMWB/Pasta-alla-Norma/CAD/RGB-Ball-Fassung.step"
+			(hide yes)
+			(offset
+				(xyz 10 0 -31.4)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz -0 -0 -0)
+			)
+		)
+		(model "/home/lukas/work/git/LMWB/Pasta-alla-Norma/CAD/RGB-Ball-Fassung-Gewinde.step"
+			(hide yes)
+			(offset
+				(xyz 10 0 -31.4)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz -0 -0 -0)
+			)
+		)
+		(model "/home/lukas/work/git/LMWB/Pasta-alla-Norma/CAD/RGB-Ball-Fassung-Gewinde-Rund.step"
 			(offset
 				(xyz 10 0 -31.4)
 			)
