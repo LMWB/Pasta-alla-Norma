@@ -57,7 +57,6 @@ void Error_Handler(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
-#define ADC_NO_OF_CHANNELS 4
 #define Onboard_LED_Pin GPIO_PIN_9
 #define Onboard_LED_GPIO_Port GPIOB
 #define DI1_Pin GPIO_PIN_2
