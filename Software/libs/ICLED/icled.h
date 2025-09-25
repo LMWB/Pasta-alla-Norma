@@ -9,4 +9,9 @@ uint8_t icled_set_color(pixel_t* pixel, uint16_t position);
 uint8_t icled_write_pixel_buffer_to_pwm(void);
 uint8_t icled_write_n_pixel_buffer_to_pwm(uint8_t no_of_leds);
 
+void init_gamma_table(void);
+void apply_gamma_and_brightness(pixel_t* base_color, uint8_t brightness, pixel_t* result_color);
+
+pixel_t apply_gamma_and_brightness_x(pixel_t base_color, uint8_t brightness);
+
 #endif /* ICLED_ICLED_H_ */

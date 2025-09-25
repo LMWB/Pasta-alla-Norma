@@ -6,12 +6,12 @@
 /* WE ICLED */
 #define BITS_PER_ICLED 	24
 
-#define HIGH 			40-0 // 40-2 for AZ-Delivery
-#define LOW 			20-0 // 20-2 for AZ-Delivery
+#define HIGH 			40-2 // 40-2 for AZ-Delivery, 40-0 for WE
+#define LOW 			20-2 // 20-2 for AZ-Delivery, 20-0 for WE
 #define RESET 			0
 
-#define START_OFFSET 	85
-#define RESET_OFFSET 	85
+#define START_OFFSET 	85	//85
+#define RESET_OFFSET 	85	//85
 
 #define PWM_FRAME_SIZE (BITS_PER_ICLED * MAX_NO_OF_LEDS + START_OFFSET + RESET_OFFSET)
 
@@ -35,6 +35,41 @@ uint8_t icled_apply_brightness(uint16_t position, uint8_t brightness) {
 		single_wire_LED_buffer[position].R = (uint8_t)((single_wire_LED_buffer[position].R * (uint16_t)brightness) / 255);
     return 1;
 	}
+}
+
+#include <math.h>
+#define GAMMA 2.2
+static uint8_t gamma_table[256];
+
+void init_gamma_table(void) {
+    for (int i = 0; i < 256; i++) {
+        gamma_table[i] = (uint8_t)(pow(i / 255.0, GAMMA) * 255.0 + 0.5);
+    }
+}
+
+// brightness: 0–255
+void apply_gamma_and_brightness(pixel_t* base_color, uint8_t brightness, pixel_t* result_color) {
+    result_color->R = (uint8_t)((gamma_table[base_color->R] * (uint16_t)brightness) / 255);
+    result_color->G = (uint8_t)((gamma_table[base_color->G] * (uint16_t)brightness) / 255);
+    result_color->B = (uint8_t)((gamma_table[base_color->B] * (uint16_t)brightness) / 255);
+}
+
+pixel_t apply_gamma_and_brightness_x(pixel_t base_color, uint8_t brightness){
+    pixel_t result_color;
+	result_color.R = (uint8_t)((gamma_table[base_color.R] * (uint16_t)brightness) / 255);
+    result_color.G = (uint8_t)((gamma_table[base_color.G] * (uint16_t)brightness) / 255);
+    result_color.B = (uint8_t)((gamma_table[base_color.B] * (uint16_t)brightness) / 255);
+    return result_color;
+}
+
+void gamma_demo(void) {
+	init_gamma_table();
+
+	pixel_t base = { 120, 50, 100 };
+	pixel_t gamma_corrected;
+	uint8_t brightness = 64; // ~25%
+
+	apply_gamma_and_brightness(&base, brightness, &gamma_corrected);
 }
 
 uint8_t icled_set_color(pixel_t* pixel, uint16_t position){

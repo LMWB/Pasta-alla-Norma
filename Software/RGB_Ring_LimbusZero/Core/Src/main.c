@@ -27,6 +27,16 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include "platformGlue.h"
+#include "ICLED/icled.h"
+#include "ICLED/icled_config.h"
+
+pixel_t myPixel;
+pixel_t pixelWhite = {.R = 255, .B = 255, .G = 255, .F_C = 128};
+pixel_t cadetBlue = {.R = 95, .B = 158, .G = 160, .F_C = 128};
+pixel_t gamma_corrected;
+pixel_t gamma_correctedX;
+uint8_t brightness = 255;
 
 /* USER CODE END Includes */
 
@@ -95,11 +105,10 @@ int main(void)
   MX_SPI1_Init();
   MX_USART1_UART_Init();
   MX_I2C1_Init();
-  MX_TIM17_Init();
-  MX_TIM16_Init();
   MX_TIM1_Init();
   /* USER CODE BEGIN 2 */
 
+  init_gamma_table();
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -107,10 +116,39 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
-
+// r=29,g=91,b=89
     /* USER CODE BEGIN 3 */
 	  HAL_GPIO_TogglePin(Onboard_LED_GPIO_Port, Onboard_LED_Pin);
+
+	  apply_gamma_and_brightness(&cadetBlue, brightness, &gamma_corrected);
+	  gamma_correctedX = apply_gamma_and_brightness_x(cadetBlue, brightness);
+
+	  /* copy one pixel to all LED present */
+	  for(uint_fast8_t i = 0; i < MAX_NO_OF_LEDS; i++){
+		  icled_set_color(&gamma_corrected, i);
+	  }
+	  icled_write_pixel_buffer_to_pwm();
+
+	  brightness-=1;
 	  HAL_Delay(200);
+
+
+
+//	  for(uint_fast8_t r = 0; r<255; r+=10){
+//		  myPixel.R+=10;
+//		  for(uint_fast8_t g = 0; g<255; g+=10){
+//			  myPixel.G+=10;
+//			  for(uint_fast8_t b = 0; b<255; b+=10){
+//				  myPixel.B+=10;
+//				  /* copy one pixel to all LED present */
+//				  for(uint_fast8_t i = 0; i < MAX_NO_OF_LEDS; i++){
+//					  icled_set_color(&myPixel, i);
+//				  }
+//				  icled_write_pixel_buffer_to_pwm();
+//				  HAL_Delay(200);
+//			  }
+//		  }
+//	  }
   }
   /* USER CODE END 3 */
 }
@@ -154,6 +192,17 @@ void SystemClock_Config(void)
 }
 
 /* USER CODE BEGIN 4 */
+
+void HAL_TIM_PWM_PulseFinishedCallback(TIM_HandleTypeDef *htim) {
+	if (htim->Instance == TIMER_COUNTER_INSTANCE) {
+		/* on STM32 C0xx the DMA is stopping it self after Pulse is finished
+		 * no need for stopping it manually just trigger a new pulse as soon
+		 * the RGB-LEd color has changed */
+//		TIMER_COUNTER_STOP_DMA();
+//		TIMER_COUNTER_SET_DUTY_CYCLE(0);
+		__NOP();
+	}
+}
 
 /* USER CODE END 4 */
 
