@@ -4811,7 +4811,7 @@
 		(uuid "ade4bae8-63ce-44d4-93cb-02910b6a0f44")
 	)
 	(label "UART-RX"
-		(at 120.65 177.8 180)
+		(at 120.65 175.26 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -4861,7 +4861,7 @@
 		(uuid "cd3c4e19-0e0e-4e96-946c-223c1637ab47")
 	)
 	(label "UART-TX"
-		(at 120.65 175.26 180)
+		(at 120.65 177.8 180)
 		(effects
 			(font
 				(size 1.27 1.27)
