@@ -1955,7 +1955,7 @@
 						)
 					)
 				)
-				(pin power_in line
+				(pin bidirectional line
 					(at 22.86 -7.62 180)
 					(length 2.54)
 					(name "PA12"
@@ -1973,7 +1973,7 @@
 						)
 					)
 				)
-				(pin power_in line
+				(pin bidirectional line
 					(at 22.86 -10.16 180)
 					(length 2.54)
 					(name "PA11"
@@ -3205,6 +3205,16 @@
 			(justify left top)
 		)
 		(uuid "8ed2a2b8-ef96-4ec4-801b-eca31953b2b3")
+	)
+	(text "C4154882_\nC2761795_SMD5050-P4 -> passt das?\nyes, a \"SMD 5050-p4\" footprint is essentially\nthe same as a \"PLC4 5050\" footprint "
+		(exclude_from_sim no)
+		(at 61.468 61.722 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+		(uuid "bfc3927c-8a6d-4b6f-b2e8-56ca7303fbd3")
 	)
 	(junction
 		(at 82.55 175.26)
@@ -4907,7 +4917,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(fields_autoplaced yes)
 		(uuid "01f76c31-e47c-4a91-9c44-62b2bccd3bea")
 		(property "Reference" "D8"
@@ -4947,6 +4957,15 @@
 			)
 		)
 		(property "Description" "RGB LED with integrated controller"
+			(at 187.96 39.37 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC PN" "C2761795"
 			(at 187.96 39.37 0)
 			(effects
 				(font
@@ -5049,7 +5068,7 @@
 		(exclude_from_sim no)
 		(in_bom no)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(uuid "0e0efa4f-9f94-40ca-9f51-4d698ef0044e")
 		(property "Reference" "H2"
 			(at 27.94 184.1499 0)
@@ -5221,6 +5240,15 @@
 			)
 		)
 		(property "Description" "Resistor"
+			(at 77.47 165.1 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC PN" "C17414"
 			(at 77.47 165.1 0)
 			(effects
 				(font
@@ -5525,7 +5553,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(fields_autoplaced yes)
 		(uuid "21be4ca3-c242-4307-ba72-5611986b5678")
 		(property "Reference" "J2"
@@ -5976,6 +6004,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC PN" "C17414"
+			(at 87.63 165.1 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "c5d60b59-6b62-40d6-8816-e8d17174dfbb")
 		)
@@ -6241,7 +6278,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(fields_autoplaced yes)
 		(uuid "39cf76a9-222f-4843-8457-56bfd94e62c6")
 		(property "Reference" "D1"
@@ -6289,6 +6326,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC PN" "C2761795"
+			(at 38.1 39.37 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "7bde2fd0-2ddd-4a18-b19b-45d7c581f0b2")
 		)
@@ -6317,7 +6363,7 @@
 		(exclude_from_sim no)
 		(in_bom no)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(uuid "3d91740c-b0c0-492d-99cd-e0ed4a763972")
 		(property "Reference" "JP1"
 			(at 20.32 38.0999 90)
@@ -6736,6 +6782,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC PN" "C49678"
+			(at 77.47 186.69 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "db4888ab-6f65-42c7-90d8-526290bd4d1f")
 		)
@@ -6837,7 +6892,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(fields_autoplaced yes)
 		(uuid "5a080d2a-1030-46e8-a7fe-48763a22f9cf")
 		(property "Reference" "D5"
@@ -6877,6 +6932,15 @@
 			)
 		)
 		(property "Description" "RGB LED with integrated controller"
+			(at 113.03 39.37 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC PN" "C2761795"
 			(at 113.03 39.37 0)
 			(effects
 				(font
@@ -7217,7 +7281,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(fields_autoplaced yes)
 		(uuid "6a038c39-95cc-4171-af33-a83cab745c0f")
 		(property "Reference" "D6"
@@ -7257,6 +7321,15 @@
 			)
 		)
 		(property "Description" "RGB LED with integrated controller"
+			(at 138.43 39.37 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC PN" "C2761795"
 			(at 138.43 39.37 0)
 			(effects
 				(font
@@ -7406,6 +7479,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC PN" "C17414"
+			(at 82.55 165.1 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "1eb9a3c2-fe7d-4225-b3bf-04ecbbf5190f")
 		)
@@ -7429,7 +7511,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(fields_autoplaced yes)
 		(uuid "793a8801-fe9b-4f19-9de3-ccdf53a57f8f")
 		(property "Reference" "J1"
@@ -7566,7 +7648,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(fields_autoplaced yes)
 		(uuid "7ef105a8-e326-4115-bd6e-9e78dde8a673")
 		(property "Reference" "D7"
@@ -7606,6 +7688,15 @@
 			)
 		)
 		(property "Description" "RGB LED with integrated controller"
+			(at 163.83 39.37 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC PN" "C2761795"
 			(at 163.83 39.37 0)
 			(effects
 				(font
@@ -8136,7 +8227,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(fields_autoplaced yes)
 		(uuid "89dfc095-c391-491b-b69c-7db4cf3cff12")
 		(property "Reference" "D9"
@@ -8176,6 +8267,15 @@
 			)
 		)
 		(property "Description" "RGB LED with integrated controller"
+			(at 212.09 39.37 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC PN" "C2761795"
 			(at 212.09 39.37 0)
 			(effects
 				(font
@@ -8602,6 +8702,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC PN" "C49678"
+			(at 82.55 186.69 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "5085c220-4f86-4cff-8986-6158b0088bce")
 		)
@@ -8837,7 +8946,7 @@
 		(exclude_from_sim no)
 		(in_bom no)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(uuid "aca15d9d-07f0-4fa6-93ab-776edde5580e")
 		(property "Reference" "H1"
 			(at 27.94 171.4499 0)
@@ -9113,7 +9222,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(fields_autoplaced yes)
 		(uuid "c22da3c8-7205-4fb1-a426-d75d650a3ccc")
 		(property "Reference" "J3"
@@ -9255,7 +9364,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(fields_autoplaced yes)
 		(uuid "c694eb22-7fdb-4eac-8d47-0f08341b55db")
 		(property "Reference" "D4"
@@ -9295,6 +9404,15 @@
 			)
 		)
 		(property "Description" "RGB LED with integrated controller"
+			(at 88.9 39.37 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC PN" "C2761795"
 			(at 88.9 39.37 0)
 			(effects
 				(font
@@ -9370,6 +9488,15 @@
 		)
 		(property "Description" "STM32 ARM Cortex-M0 Microcontroller, 32KB flash, 6KB RAM, 48MHz, 2.0-3.6V, TSSOP20"
 			(at 238.76 149.606 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC PN" "C5456198"
+			(at 219.71 109.22 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9764,6 +9891,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC PN" "C6186"
+			(at 44.45 78.74 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "bc306052-5194-4db4-8d13-bdde42c41a7f")
 		)
@@ -9968,6 +10104,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC PN" "C49678"
+			(at 87.63 186.69 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "50ef1843-ddf9-4885-a8fa-11316ec94650")
 		)
@@ -10068,7 +10213,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(fields_autoplaced yes)
 		(uuid "e31365c6-f762-441c-b408-146900434f7d")
 		(property "Reference" "D3"
@@ -10108,6 +10253,15 @@
 			)
 		)
 		(property "Description" "RGB LED with integrated controller"
+			(at 64.77 39.37 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC PN" "C2761795"
 			(at 64.77 39.37 0)
 			(effects
 				(font
@@ -10259,6 +10413,15 @@
 			)
 		)
 		(property "Description" "2048 bits EEPROM with I2C Interface, 256 words of 8 bits, 1.8V-5.5V"
+			(at 133.35 111.76 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC PN" "C18723540"
 			(at 133.35 111.76 0)
 			(effects
 				(font

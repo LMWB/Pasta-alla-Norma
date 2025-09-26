@@ -164,11 +164,24 @@
 				)
 			)
 		)
+		(property "LCSC PN" "C2761795"
+			(at 0 0 270)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "b5b826f0-9888-4433-a6f0-0909fa58dda7")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property ki_fp_filters "LED*WS2812*PLCC*5.0x5.0mm*P3.2mm*")
 		(path "/01f76c31-e47c-4a91-9c44-62b2bccd3bea")
 		(sheetname "/")
 		(sheetfile "lmwb_RGB_Ball.kicad_sch")
-		(attr smd)
+		(attr smd dnp)
 		(fp_line
 			(start -3.5 2.75)
 			(end 3.05 2.75)
@@ -682,11 +695,24 @@
 				)
 			)
 		)
+		(property "LCSC PN" "C2761795"
+			(at 0 0 135)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "0e31765d-5292-4ef7-a855-24a87ecb97df")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property ki_fp_filters "LED*WS2812*PLCC*5.0x5.0mm*P3.2mm*")
 		(path "/e31365c6-f762-441c-b408-146900434f7d")
 		(sheetname "/")
 		(sheetfile "lmwb_RGB_Ball.kicad_sch")
-		(attr smd)
+		(attr smd dnp)
 		(fp_line
 			(start 2.7 0.9)
 			(end 2.7 -0.9)
@@ -1514,7 +1540,7 @@
 		(path "/0e0efa4f-9f94-40ca-9f51-4d698ef0044e")
 		(sheetname "/")
 		(sheetfile "lmwb_RGB_Ball.kicad_sch")
-		(attr exclude_from_pos_files exclude_from_bom)
+		(attr exclude_from_pos_files exclude_from_bom dnp)
 		(fp_circle
 			(center 0 0)
 			(end 4.3 0)
@@ -1616,11 +1642,24 @@
 				)
 			)
 		)
+		(property "LCSC PN" "C2761795"
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "91de33f9-f65c-408b-bc65-6a7dc410d55f")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property ki_fp_filters "LED*WS2812*PLCC*5.0x5.0mm*P3.2mm*")
 		(path "/39cf76a9-222f-4843-8457-56bfd94e62c6")
 		(sheetname "/")
 		(sheetfile "lmwb_RGB_Ball.kicad_sch")
-		(attr smd)
+		(attr smd dnp)
 		(fp_line
 			(start 3.5 2.3)
 			(end 3.5 -2.75)
@@ -1916,6 +1955,19 @@
 			(effects
 				(font
 					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "LCSC PN" "C18723540"
+			(at 0 0 45)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "7cfd5283-7889-4eb6-ad2c-689efd48eb40")
+			(effects
+				(font
+					(size 1 1)
 					(thickness 0.15)
 				)
 			)
@@ -2722,6 +2774,19 @@
 				)
 			)
 		)
+		(property "LCSC PN" "C17414"
+			(at 0 0 90)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "3c616414-4cb7-41c2-8390-08c6fc2a3aa6")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property ki_fp_filters "R_*")
 		(path "/126a1ce4-d5d5-40bf-a8c0-d1f33bf95c25")
 		(sheetname "/")
@@ -3133,6 +3198,19 @@
 				)
 			)
 		)
+		(property "LCSC PN" "C5456198"
+			(at 0 0 90)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "5f12ee02-af67-4d69-90cf-63b1324bf274")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(path "/cac99a22-5d9a-47e3-85da-5d246ef44b96")
 		(sheetname "/")
 		(sheetfile "lmwb_RGB_Ball.kicad_sch")
@@ -3527,7 +3605,7 @@
 			(roundrect_rratio 0.25)
 			(net 22 "unconnected-(U3-PA11-Pad16)")
 			(pinfunction "PA11")
-			(pintype "power_in+no_connect")
+			(pintype "bidirectional+no_connect")
 			(uuid "79a21f42-457f-4009-bf09-f3f1fed23c1c")
 		)
 		(pad "17" smd roundrect
@@ -3537,7 +3615,7 @@
 			(roundrect_rratio 0.25)
 			(net 7 "/SPI-MOSI")
 			(pinfunction "PA12")
-			(pintype "power_in")
+			(pintype "bidirectional")
 			(uuid "ab472012-9278-40df-9e49-e7c1e6b69364")
 		)
 		(pad "18" smd roundrect
@@ -4089,7 +4167,7 @@
 		(path "/aca15d9d-07f0-4fa6-93ab-776edde5580e")
 		(sheetname "/")
 		(sheetfile "lmwb_RGB_Ball.kicad_sch")
-		(attr exclude_from_pos_files exclude_from_bom)
+		(attr exclude_from_pos_files exclude_from_bom dnp)
 		(fp_circle
 			(center 0 0)
 			(end 4.3 0)
@@ -4226,11 +4304,24 @@
 				)
 			)
 		)
+		(property "LCSC PN" "C2761795"
+			(at 0 0 315)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "14922633-5dc5-4ac8-a799-952269af426e")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property ki_fp_filters "LED*WS2812*PLCC*5.0x5.0mm*P3.2mm*")
 		(path "/7ef105a8-e326-4115-bd6e-9e78dde8a673")
 		(sheetname "/")
 		(sheetfile "lmwb_RGB_Ball.kicad_sch")
-		(attr smd)
+		(attr smd dnp)
 		(fp_line
 			(start -3.5 2.75)
 			(end 3.05 2.75)
@@ -4954,6 +5045,19 @@
 				)
 			)
 		)
+		(property "LCSC PN" "C49678"
+			(at 0 0 270)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "88b231a8-05e3-4c89-89ea-79192247de51")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property ki_fp_filters "C_*")
 		(path "/e119e77e-5ff5-46f5-aaeb-932cb73aebd2")
 		(sheetname "/")
@@ -5149,6 +5253,19 @@
 			(effects
 				(font
 					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "LCSC PN" "C49678"
+			(at 0 0 270)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "877e4ca5-eea7-4eb8-88cd-a24d1b9ebe61")
+			(effects
+				(font
+					(size 1 1)
 					(thickness 0.15)
 				)
 			)
@@ -5354,11 +5471,24 @@
 				)
 			)
 		)
+		(property "LCSC PN" "C2761795"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "28391f99-8b2f-433d-8394-b47bb7d8062e")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property ki_fp_filters "LED*WS2812*PLCC*5.0x5.0mm*P3.2mm*")
 		(path "/6a038c39-95cc-4171-af33-a83cab745c0f")
 		(sheetname "/")
 		(sheetfile "lmwb_RGB_Ball.kicad_sch")
-		(attr smd)
+		(attr smd dnp)
 		(fp_line
 			(start -3.5 -2.75)
 			(end -3.5 2.75)
@@ -5877,7 +6007,7 @@
 		(sheetname "/")
 		(sheetfile "lmwb_RGB_Ball.kicad_sch")
 		(zone_connect 1)
-		(attr exclude_from_pos_files exclude_from_bom allow_soldermask_bridges)
+		(attr exclude_from_pos_files exclude_from_bom dnp allow_soldermask_bridges)
 		(fp_poly
 			(pts
 				(xy -0.75 -0.75) (xy 0.75 -0.75) (xy 0.75 0.75) (xy -0.75 0.75)
@@ -7479,6 +7609,19 @@
 				)
 			)
 		)
+		(property "LCSC PN" "C6186"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "994ae3fd-dc37-409f-a280-97adec4aa7a9")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property ki_fp_filters "SOT?223*TabPin2*")
 		(path "/d6d988e7-1dff-4022-833e-db9bc77e03cf")
 		(sheetname "/")
@@ -7744,11 +7887,24 @@
 				)
 			)
 		)
+		(property "LCSC PN" "C2761795"
+			(at 0 0 45)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "a5236879-ba08-466e-b285-65aa448a93c7")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property ki_fp_filters "LED*WS2812*PLCC*5.0x5.0mm*P3.2mm*")
 		(path "/5a080d2a-1030-46e8-a7fe-48763a22f9cf")
 		(sheetname "/")
 		(sheetfile "lmwb_RGB_Ball.kicad_sch")
-		(attr smd)
+		(attr smd dnp)
 		(fp_line
 			(start -3.5 -2.75)
 			(end -3.5 2.75)
@@ -8050,11 +8206,24 @@
 				)
 			)
 		)
+		(property "LCSC PN" "C2761795"
+			(at 0 0 225)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "1e278535-785e-4e9b-a669-5fda6ddedfe8")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property ki_fp_filters "LED*WS2812*PLCC*5.0x5.0mm*P3.2mm*")
 		(path "/89dfc095-c391-491b-b69c-7db4cf3cff12")
 		(sheetname "/")
 		(sheetfile "lmwb_RGB_Ball.kicad_sch")
-		(attr smd)
+		(attr smd dnp)
 		(fp_line
 			(start 3.05 2.75)
 			(end 3.5 2.3)
@@ -8354,6 +8523,19 @@
 				)
 			)
 		)
+		(property "LCSC PN" "C17414"
+			(at 0 0 90)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "f375bcdd-9d03-40e2-9967-56e2f7a2cf4b")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property ki_fp_filters "R_*")
 		(path "/3517bd6e-4f8c-4063-893f-d3bf31d6a4f2")
 		(sheetname "/")
@@ -8557,7 +8739,7 @@
 		(path "/21be4ca3-c242-4307-ba72-5611986b5678")
 		(sheetname "/")
 		(sheetfile "lmwb_RGB_Ball.kicad_sch")
-		(attr through_hole)
+		(attr through_hole dnp)
 		(fp_line
 			(start -1.38 -1.38)
 			(end 0 -1.379999)
@@ -8817,6 +8999,19 @@
 				)
 			)
 		)
+		(property "LCSC PN" "C49678"
+			(at 0 0 270)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "cbf94ff2-7df1-447c-a486-7ffc5924c15c")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property ki_fp_filters "C_*")
 		(path "/a372bb92-0658-47bf-835b-0312f1bc426b")
 		(sheetname "/")
@@ -9018,11 +9213,24 @@
 				)
 			)
 		)
+		(property "LCSC PN" "C2761795"
+			(at 0 0 90)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "5acf1a52-a63b-4e21-ace3-a28461390b3a")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property ki_fp_filters "LED*WS2812*PLCC*5.0x5.0mm*P3.2mm*")
 		(path "/c694eb22-7fdb-4eac-8d47-0f08341b55db")
 		(sheetname "/")
 		(sheetfile "lmwb_RGB_Ball.kicad_sch")
-		(attr smd)
+		(attr smd dnp)
 		(fp_line
 			(start -3.5 -2.75)
 			(end 3.5 -2.75)
@@ -9326,7 +9534,7 @@
 		(path "/793a8801-fe9b-4f19-9de3-ccdf53a57f8f")
 		(sheetname "/")
 		(sheetfile "lmwb_RGB_Ball.kicad_sch")
-		(attr through_hole)
+		(attr through_hole dnp)
 		(fp_line
 			(start 1.38 1.27)
 			(end 1.38 6.46)
@@ -9798,6 +10006,19 @@
 				)
 			)
 		)
+		(property "LCSC PN" "C17414"
+			(at 0 0 90)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "50cd2836-a762-4229-854d-f4e955ca8b23")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property ki_fp_filters "R_*")
 		(path "/70aa4610-0176-420d-ba42-343b18a65418")
 		(sheetname "/")
@@ -10004,6 +10225,7 @@
 		(path "/c22da3c8-7205-4fb1-a426-d75d650a3ccc")
 		(sheetname "/")
 		(sheetfile "lmwb_RGB_Ball.kicad_sch")
+		(attr dnp)
 		(fp_line
 			(start 6.435 2.9)
 			(end -6.435 2.9)
