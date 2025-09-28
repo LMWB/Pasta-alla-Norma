@@ -17,8 +17,6 @@ void rgb_ball_main(void) {
 	pixel_t olivedrab = { .R = 107, .G = 142, .B = 35 };
 	pixel_t gamma_corrected;
 
-	init_gamma_table();
-
 	while (1) {
 
 		switch (z) {
@@ -75,7 +73,7 @@ void rgb_ball_main(void) {
 			HAL_GPIO_TogglePin(Onboard_LED_GPIO_Port, Onboard_LED_Pin);
 			icled_write_pixel_buffer_to_pwm();
 		} else {
-			/* write  one pixel to one specific position in the PWM buffer */
+			/* copy one pixel to specific positions only and fire the pwm  */
 			icled_set_color(&gamma_corrected, 0);
 			icled_set_color(&gamma_corrected, 1);
 			icled_set_color(&black, 2);
@@ -91,10 +89,8 @@ void rgb_ball_main(void) {
 			HAL_GPIO_TogglePin(Onboard_LED_GPIO_Port, Onboard_LED_Pin);
 			icled_write_pixel_buffer_to_pwm();
 		}
-
 		/* this is the speed of fade progress */
 		DELAY(delay_ms);
-
 	}
 }
 
