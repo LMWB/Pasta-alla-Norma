@@ -7,7 +7,6 @@
 #define MAX_NO_OF_LEDS	12
 
 typedef struct {
-	uint8_t F_C;	// control byte for brightness 0..100%, ICLED_dual uses a slightly different approach
 	uint8_t B;		// byte for color blue
 	uint8_t G;		// byte for color green
 	uint8_t R;		// byte for color red

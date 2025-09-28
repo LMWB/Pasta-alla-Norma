@@ -31,13 +31,18 @@
 #include "ICLED/icled.h"
 #include "ICLED/icled_config.h"
 
-pixel_t myPixel;
-pixel_t pixelWhite = {.R = 255, .B = 255, .G = 255, .F_C = 128};
-pixel_t cadetBlue = {.R = 95, .B = 158, .G = 160, .F_C = 128};
-pixel_t gamma_corrected;
-pixel_t gamma_correctedX;
-uint8_t brightness = 255;
+#define brightness 255
+#define delay_ms 200
+  uint8_t i = 0;
+  uint8_t z = 0;
 
+  pixel_t black 	= {.R = 0, .G = 0, .B = 0 };
+  pixel_t cadetBlue 	= {.R = 95, .G = 158, .B = 160 };
+  pixel_t darkorange	= {.R = 255, .G = 140, .B = 0 };
+  pixel_t crimson 	= {.R = 220, .G = 20, .B = 60 };
+  pixel_t indigo 		= {.R = 75, .G = 0, .B = 130 };
+  pixel_t olivedrab 	= {.R = 107, .G = 142, .B = 35};
+  pixel_t gamma_corrected;
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -109,6 +114,7 @@ int main(void)
   /* USER CODE BEGIN 2 */
 
   init_gamma_table();
+
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -116,39 +122,63 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
-// r=29,g=91,b=89
+
     /* USER CODE BEGIN 3 */
-	  HAL_GPIO_TogglePin(Onboard_LED_GPIO_Port, Onboard_LED_Pin);
 
-	  apply_gamma_and_brightness(&cadetBlue, brightness, &gamma_corrected);
-	  gamma_correctedX = apply_gamma_and_brightness_x(cadetBlue, brightness);
+	  switch (z) {
+		case 0:
+			blend_and_dim_to_linear(&cadetBlue, &darkorange, i++, brightness, &gamma_corrected);
+			if(i == 255){ z = 1; i = 0;}
+			break;
+		case 1:
+			blend_and_dim_to_linear(&darkorange, &crimson, i++, brightness, &gamma_corrected);
+			if(i == 255){ z = 2; i = 0;}
+			break;
+		case 2:
+			blend_and_dim_to_linear(&crimson, &indigo, i++, brightness, &gamma_corrected);
+			if(i == 255){ z = 3; i = 0;}
+			break;
+		case 3:
+			blend_and_dim_to_linear(&indigo, &olivedrab, i++, brightness, &gamma_corrected);
+			if(i == 255){ z = 4; i = 0;}
+			break;
+		case 4:
+			blend_and_dim_to_linear(&olivedrab, &cadetBlue, i++, brightness, &gamma_corrected);
+			if(i == 255){ z = 0; i = 0;}
+			break;
 
-	  /* copy one pixel to all LED present */
-	  for(uint_fast8_t i = 0; i < MAX_NO_OF_LEDS; i++){
-		  icled_set_color(&gamma_corrected, i);
-	  }
-	  icled_write_pixel_buffer_to_pwm();
+		default:
+			break;
+	}
 
-	  brightness-=1;
-	  HAL_Delay(200);
+		if (0) {
+			/* copy one pixel to all LED present and fire the pwm */
+			for (uint_fast8_t j = 0; j < MAX_NO_OF_LEDS; j++) {
+				icled_set_color(&gamma_corrected, j);
+			}
+			HAL_GPIO_TogglePin(Onboard_LED_GPIO_Port, Onboard_LED_Pin);
+			icled_write_pixel_buffer_to_pwm();
+		} else {
+			/* write  one pixel to one specific position in the PWM buffer */
+			icled_set_color(&gamma_corrected, 0);
+			icled_set_color(&gamma_corrected, 1);
+			icled_set_color(&black, 2);
+			icled_set_color(&gamma_corrected, 3);
+			icled_set_color(&gamma_corrected, 4);
+			icled_set_color(&black, 5);
+			icled_set_color(&gamma_corrected, 6);
+			icled_set_color(&gamma_corrected, 7);
+			icled_set_color(&black, 8);
+			icled_set_color(&gamma_corrected, 9);
+			icled_set_color(&gamma_corrected, 10);
+			icled_set_color(&black, 11);
+			HAL_GPIO_TogglePin(Onboard_LED_GPIO_Port, Onboard_LED_Pin);
+			icled_write_pixel_buffer_to_pwm();
+		}
 
+	/* this is the speed of fade progress */
+	HAL_Delay(delay_ms);
 
-
-//	  for(uint_fast8_t r = 0; r<255; r+=10){
-//		  myPixel.R+=10;
-//		  for(uint_fast8_t g = 0; g<255; g+=10){
-//			  myPixel.G+=10;
-//			  for(uint_fast8_t b = 0; b<255; b+=10){
-//				  myPixel.B+=10;
-//				  /* copy one pixel to all LED present */
-//				  for(uint_fast8_t i = 0; i < MAX_NO_OF_LEDS; i++){
-//					  icled_set_color(&myPixel, i);
-//				  }
-//				  icled_write_pixel_buffer_to_pwm();
-//				  HAL_Delay(200);
-//			  }
-//		  }
-//	  }
   }
   /* USER CODE END 3 */
 }
