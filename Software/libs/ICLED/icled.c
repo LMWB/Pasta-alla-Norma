@@ -16,9 +16,7 @@
 #define PWM_FRAME_SIZE (BITS_PER_ICLED * MAX_NO_OF_LEDS + START_OFFSET + RESET_OFFSET)
 
 static pixel_t single_wire_LED_buffer[MAX_NO_OF_LEDS];
-
-// void HAL_TIM_PWM_PulseFinishedCallback(TIM_HandleTypeDef *htim) -> Interrupt is placed in rollenralle.c
-
+static uint16_t bit_buffer[BITS_PER_ICLED] = { 0 };			// working buffer to convert RGB-Color to ICLED Bit Frame
 
 void icled_send_bit_stream(uint32_t *data_array, uint16_t length) {
 	TIMER_COUNTER_START_DMA(data_array, length);
@@ -142,10 +140,9 @@ void icled_convert_bool_to_pwm_frame(uint16_t *bit_buffer, uint32_t length) {
 	}
 }
 
-static uint16_t bit_buffer[BITS_PER_ICLED] = { 0 };		// working buffer to convert RGB-Color to ICLED Bit Frame
-static uint16_t pwm_dma_buffer[PWM_FRAME_SIZE] = { 0 }; 	// buffer to send to ICLED
-
 uint8_t icled_write_pixel_buffer_to_pwm(void){
+	uint16_t pwm_dma_buffer[PWM_FRAME_SIZE] = { 0 }; 	// buffer to send to ICLED
+
 	/* convert one RGB-color to bit pattern and place it in the bit buffer that holds the total */
 	for(uint_fast16_t k = 0; k < MAX_NO_OF_LEDS; ++k)
 	{
@@ -159,6 +156,8 @@ uint8_t icled_write_pixel_buffer_to_pwm(void){
 }
 
 uint8_t icled_write_n_pixel_buffer_to_pwm(uint8_t no_of_leds){
+	uint16_t pwm_dma_buffer[PWM_FRAME_SIZE] = { 0 }; 	// buffer to send to ICLED
+
 	/* convert one RGB-color to bit pattern and place it in the bit buffer that holds the total */
 	for(uint_fast16_t k = 0; k < no_of_leds; ++k)
 	{
