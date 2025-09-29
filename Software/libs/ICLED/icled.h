@@ -11,8 +11,8 @@ uint8_t icled_write_pixel_buffer_to_pwm(void);
 
 //void apply_gamma_and_brightness(pixel_t* base_color, uint8_t brightness, pixel_t* result_color);
 
-void blend_and_dim_to_linear(const pixel_t *a,
-		const pixel_t *b, uint8_t t,
+void blend_and_dim_to_linear(pixel_t *a,
+		pixel_t *b, uint8_t t,
 		uint8_t brightness, pixel_t *out);
 
 #endif /* ICLED_ICLED_H_ */

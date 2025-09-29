@@ -27,7 +27,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include "RGB_Ball/rgb_ball.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -99,6 +99,7 @@ int main(void)
   /* USER CODE BEGIN 2 */
 
   rgb_ball_main();
+  //rgb_ball_christmas_color_fade();
 
   // never get here!
 

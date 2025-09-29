@@ -57,7 +57,7 @@ void icled_send_bit_stream(uint32_t *data_array, uint16_t length) {
 // t: 0..255 blend fraction (0 = a, 255 = b)
 // brightness: 0..255 brightness in linear space
 // out is the linear values to send to the LED (0..255)
-void blend_and_dim_to_linear(const pixel_t *a, const pixel_t *b, uint8_t t, uint8_t brightness, pixel_t *out)
+void blend_and_dim_to_linear(pixel_t *a, pixel_t *b, uint8_t t, uint8_t brightness, pixel_t *out)
 {
     uint16_t r1 = gamma_table[a->R];
     uint16_t g1 = gamma_table[a->G];
