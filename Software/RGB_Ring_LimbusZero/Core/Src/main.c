@@ -98,8 +98,9 @@ int main(void)
   MX_TIM1_Init();
   /* USER CODE BEGIN 2 */
 
-  rgb_ball_main();
+  //rgb_ball_main();
   //rgb_ball_christmas_color_fade();
+  rgb_ball_rainbow_fade();
 
   // never get here!
 
