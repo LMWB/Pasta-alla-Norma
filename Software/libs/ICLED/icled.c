@@ -57,29 +57,47 @@ void icled_send_bit_stream(uint32_t *data_array, uint16_t length) {
 // t: 0..255 blend fraction (0 = a, 255 = b)
 // brightness: 0..255 brightness in linear space
 // out is the linear values to send to the LED (0..255)
-void blend_and_dim_to_linear(pixel_t *a, pixel_t *b, uint8_t t, uint8_t brightness, pixel_t *out)
+void blend_and_dim_to_linear(pixel_t *x, pixel_t *y, uint8_t t, uint8_t brightness, pixel_t *out)
 {
-    uint16_t r1 = gamma_table[a->R];
-    uint16_t g1 = gamma_table[a->G];
-    uint16_t b1 = gamma_table[a->B];
+    uint16_t r1 = gamma_table[x->R];
+    uint16_t g1 = gamma_table[x->G];
+    uint16_t b1 = gamma_table[x->B];
 
-    uint16_t r2 = gamma_table[b->R];
-    uint16_t g2 = gamma_table[b->G];
-    uint16_t b2 = gamma_table[b->B];
+    uint16_t r2 = gamma_table[y->R];
+    uint16_t g2 = gamma_table[y->G];
+    uint16_t b2 = gamma_table[y->B];
 
     uint32_t r = ((uint32_t)(255 - t) * r1 + (uint32_t)t * r2 + 127) / 255;
     uint32_t g = ((uint32_t)(255 - t) * g1 + (uint32_t)t * g2 + 127) / 255;
-    uint32_t bl= ((uint32_t)(255 - t) * b1 + (uint32_t)t * b2 + 127) / 255;
+    uint32_t b = ((uint32_t)(255 - t) * b1 + (uint32_t)t * b2 + 127) / 255;
 
     // apply global brightness (in linear)
     r  = (r  * brightness + 127) / 255;
     g  = (g  * brightness + 127) / 255;
-    bl = (bl * brightness + 127) / 255;
+    b = (b * brightness + 127) / 255;
 
     // clamp (probably unnecessary but safe)
     out->R = (uint8_t)(r > 255 ? 255 : r);
     out->G = (uint8_t)(g > 255 ? 255 : g);
-    out->B = (uint8_t)(bl > 255 ? 255 : bl);
+    out->B = (uint8_t)(b > 255 ? 255 : b);
+}
+
+void apply_gamma_and_brightness(pixel_t* x, uint8_t brightness, pixel_t* out)
+//void blend_and_dim_to_linear(pixel_t *x, pixel_t *y, uint8_t t, uint8_t brightness, pixel_t *out)
+{
+    uint8_t r1 = gamma_table[x->R];
+    uint8_t g1 = gamma_table[x->G];
+    uint8_t b1 = gamma_table[x->B];
+
+    // apply global brightness (in linear)
+    uint8_t r  = (r  * brightness + 127) / 255;
+    uint8_t g  = (g  * brightness + 127) / 255;
+    uint8_t b = (b * brightness + 127) / 255;
+
+    // clamp (probably unnecessary but safe)
+    out->R = (uint8_t)(r > 255 ? 255 : r);
+    out->G = (uint8_t)(g > 255 ? 255 : g);
+    out->B = (uint8_t)(b > 255 ? 255 : b);
 }
 
 uint8_t icled_set_color(pixel_t* pixel, uint16_t position){
