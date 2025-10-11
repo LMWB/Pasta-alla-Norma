@@ -90,9 +90,9 @@ void apply_gamma_and_brightness(pixel_t* x, uint8_t brightness, pixel_t* out)
     uint8_t b1 = gamma_table[x->B];
 
     // apply global brightness (in linear)
-    uint8_t r  = (r  * brightness + 127) / 255;
-    uint8_t g  = (g  * brightness + 127) / 255;
-    uint8_t b = (b * brightness + 127) / 255;
+    uint8_t r  = (r1  * brightness + 127) / 255;
+    uint8_t g  = (g1  * brightness + 127) / 255;
+    uint8_t b = (b1 * brightness + 127) / 255;
 
     // clamp (probably unnecessary but safe)
     out->R = (uint8_t)(r > 255 ? 255 : r);

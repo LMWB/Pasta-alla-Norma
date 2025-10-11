@@ -222,6 +222,15 @@ void rgb_ball_christmas_color_fade(void) {
 	}
 }
 
+// sunstorm palette
+static pixel_t sunstorm_colors[] = {
+    {120,  40,   0},   // calm base
+    {200,  60,   0},   // rising heat
+    {255, 100,   0},   // burst
+    {255, 180,  60},   // flare peak
+    {255, 241, 224},   // plasma flash
+    {180,  40,   0},   // cooling
+};
 
 void fade_between(const pixel_t* a, const pixel_t* b, uint8_t steps, uint16_t base_delay_ms)
 {
@@ -230,15 +239,15 @@ void fade_between(const pixel_t* a, const pixel_t* b, uint8_t steps, uint16_t ba
         uint8_t R = a->R + ((int16_t)(b->R - a->R) * i) / steps;
         uint8_t G = a->G + ((int16_t)(b->G - a->G) * i) / steps;
         uint8_t B = a->B + ((int16_t)(b->B - a->B) * i) / steps;
-
         pixel_t mixed = {R, G, B};
-        pixel_t out;
 
         // random flicker brightness: around 80–100%
-        uint8_t flicker = 200 + (rand() % 56);  // 200–255
-        apply_gamma_and_brightness(&mixed, flicker, &out);
+        //uint8_t flicker = 200 + (rand() % 56);  // 200–255
+        uint8_t flicker = 180 + (rand() % 76);  // 180–255
 
-        send_to_led(&out);
+
+        apply_gamma_and_brightness(&mixed, flicker, &gamma_corrected);
+        send_to_led(&gamma_corrected);
         HAL_GPIO_TogglePin(Onboard_LED_GPIO_Port, Onboard_LED_Pin);
 
         // random delay variation (±30%)
@@ -249,23 +258,20 @@ void fade_between(const pixel_t* a, const pixel_t* b, uint8_t steps, uint16_t ba
 
 void sunstorm_cycle(void)
 {
-	// sunstorm palette
-	const pixel_t sunstorm_colors[] = {
-	    {120,  40,   0},   // calm base
-	    {200,  60,   0},   // rising heat
-	    {255, 100,   0},   // burst
-	    {255, 180,  60},   // flare peak
-	    {255, 240, 200},   // plasma flash
-	    {180,  40,   0},   // cooling
-	};
-uint8_t NUM_COLORS = (sizeof(sunstorm_colors)/sizeof(sunstorm_colors[0]));
-
+	uint8_t NUM_COLORS = (sizeof(sunstorm_colors)/sizeof(sunstorm_colors[0]));
     while (1) {
         for (uint8_t i = 0; i < NUM_COLORS - 1; i++) {
             // faster in hot phases, slower in cool ones
-            uint8_t steps = (i == 2 || i == 3) ? 25 : 40;
-            uint16_t delay = (i == 2 || i == 3) ? 15 : 40;
-            fade_between(&sunstorm_colors[i], &sunstorm_colors[i + 1], steps, delay);
+
+            //uint8_t steps = (i == 2 || i == 3) ? 25 : 40;
+            //uint16_t delay = (i == 2 || i == 3) ? 15 : 40;
+
+            uint8_t steps 	= (i == 3 || i == 4) ? 40 : 100;
+            uint16_t delay 	= (i == 3 || i == 4) ? 20 : 100;
+
+            pixel_t* a = &sunstorm_colors[i];
+            pixel_t* b = &sunstorm_colors[ (i+1) % NUM_COLORS];
+            fade_between(a, b, steps, delay);
         }
     }
 }
@@ -273,12 +279,12 @@ uint8_t NUM_COLORS = (sizeof(sunstorm_colors)/sizeof(sunstorm_colors[0]));
 
 void rgb_ball_sun_storm(void){
 	//
-	pixel_t Calm_Base	= {120, 40, 0}; // dim orange glow (solar surface)
-	pixel_t Rising_Heat	= {200, 60, 0}; // deeper red-orange
-	pixel_t Burst_Core  = {255, 100, 0}; // bright red with some yellow
-	pixel_t Flare_Peak	= {255, 180, 60}; //glowing orange-white
-	pixel_t Plasma_Flash= {255, 240, 200}; // almost white-hot
-	pixel_t Cooling_Down= {180, 40, 0}; // back to dark red-orange
+	pixel_t Calm_Base	= {120, 40,		0}; 	// dim orange glow (solar surface)
+	pixel_t Rising_Heat	= {200, 60, 	0}; 	// deeper red-orange
+	pixel_t Burst_Core  = {255, 100, 	0}; 	// bright red with some yellow
+	pixel_t Flare_Peak	= {255, 180, 	60}; 	// glowing orange-white
+	pixel_t Plasma_Flash= {255, 240,	200}; 	// almost white-hot
+	pixel_t Cooling_Down= {180, 40,		0}; 	// back to dark red-orange
 
 	pixel_t black = {0, 0, 0};
 
@@ -312,21 +318,8 @@ void rgb_ball_sun_storm(void){
 		// execute function belonging to the new state
 		FSM[z0].callback( FSM[z0].color_start, FSM[z0].color_stop, i++);
 
-		/* copy one pixel to specific positions only and fire the pwm  */
-		icled_set_color(&gamma_corrected, 0);
-		icled_set_color(&gamma_corrected, 1);
-		icled_set_color(&black, 2);
-		icled_set_color(&gamma_corrected, 3);
-		icled_set_color(&gamma_corrected, 4);
-		icled_set_color(&black, 5);
-		icled_set_color(&gamma_corrected, 6);
-		icled_set_color(&gamma_corrected, 7);
-		icled_set_color(&black, 8);
-		icled_set_color(&gamma_corrected, 9);
-		icled_set_color(&gamma_corrected, 10);
-		icled_set_color(&black, 11);
+		send_to_led(&gamma_corrected);
 		HAL_GPIO_TogglePin(Onboard_LED_GPIO_Port, Onboard_LED_Pin);
-		icled_write_pixel_buffer_to_pwm();
 		DELAY(delay_ms);
 	}
 }
@@ -383,21 +376,8 @@ void rgb_ball_daylight(void){
 		// execute function belonging to the new state
 		FSM[z0].callback( FSM[z0].color_start, FSM[z0].color_stop, i++);
 
-		/* copy one pixel to specific positions only and fire the pwm  */
-		icled_set_color(&gamma_corrected, 0);
-		icled_set_color(&gamma_corrected, 1);
-		icled_set_color(&black, 2);
-		icled_set_color(&gamma_corrected, 3);
-		icled_set_color(&gamma_corrected, 4);
-		icled_set_color(&black, 5);
-		icled_set_color(&gamma_corrected, 6);
-		icled_set_color(&gamma_corrected, 7);
-		icled_set_color(&black, 8);
-		icled_set_color(&gamma_corrected, 9);
-		icled_set_color(&gamma_corrected, 10);
-		icled_set_color(&black, 11);
+		send_to_led(&gamma_corrected);
 		HAL_GPIO_TogglePin(Onboard_LED_GPIO_Port, Onboard_LED_Pin);
-		icled_write_pixel_buffer_to_pwm();
 		DELAY(delay_ms);
 	}
 }
@@ -465,24 +445,11 @@ void rgb_ball_main(void) {
 			for (uint_fast8_t j = 0; j < MAX_NO_OF_LEDS; j++) {
 				icled_set_color(&gamma_corrected, j);
 			}
-			HAL_GPIO_TogglePin(Onboard_LED_GPIO_Port, Onboard_LED_Pin);
 			icled_write_pixel_buffer_to_pwm();
+			HAL_GPIO_TogglePin(Onboard_LED_GPIO_Port, Onboard_LED_Pin);
 		} else {
-			/* copy one pixel to specific positions only and fire the pwm  */
-			icled_set_color(&gamma_corrected, 0);
-			icled_set_color(&gamma_corrected, 1);
-			icled_set_color(&black, 2);
-			icled_set_color(&gamma_corrected, 3);
-			icled_set_color(&gamma_corrected, 4);
-			icled_set_color(&black, 5);
-			icled_set_color(&gamma_corrected, 6);
-			icled_set_color(&gamma_corrected, 7);
-			icled_set_color(&black, 8);
-			icled_set_color(&gamma_corrected, 9);
-			icled_set_color(&gamma_corrected, 10);
-			icled_set_color(&black, 11);
+			send_to_led(&gamma_corrected);
 			HAL_GPIO_TogglePin(Onboard_LED_GPIO_Port, Onboard_LED_Pin);
-			icled_write_pixel_buffer_to_pwm();
 		}
 		/* this is the speed of fade progress */
 		DELAY(delay_ms);
