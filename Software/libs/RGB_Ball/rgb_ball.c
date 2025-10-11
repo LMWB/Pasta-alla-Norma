@@ -71,8 +71,8 @@ void send_to_led(pixel_t* color){
 }
 
 void rgb_ball_init(void){
-	// pull output 1 high to have somthing to read from IN1 and IN2
-	HAL_GPIO_WritePin(OUT1_GPIO_Port, OUT1_Pin, 1);
+	// pull output 1 high to have something to read from IN1 and IN2
+	WRITE_PIN(OUT1_GPIO_Port, OUT1_Pin, 1);
 	rgb_ball_all_off();
 	DELAY(200);
 }
@@ -91,8 +91,8 @@ uint8_t rgb_ball_read_jumpers(void){
 
 	uint8_t jumper_state = 0;
 	// read from pin IN1 and IN2
-	jumper_state |= (HAL_GPIO_ReadPin(IN1_GPIO_Port, IN1_Pin) << 0);
-	jumper_state |= (HAL_GPIO_ReadPin(IN2_GPIO_Port, IN2_Pin) << 1);
+	jumper_state |= (READ_PIN(IN1_GPIO_Port, IN1_Pin) << 0);
+	jumper_state |= (READ_PIN(IN2_GPIO_Port, IN2_Pin) << 1);
 	return jumper_state;
 }
 
