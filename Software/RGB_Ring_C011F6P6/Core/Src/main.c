@@ -27,13 +27,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-typedef struct __myType{
-	uint8_t r;
-	uint8_t g;
-	uint8_t b;
-}myType;
-
-static myType reserve_some_memory[1024];
+#include "RGB_Ball/rgb_ball.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -103,6 +97,28 @@ int main(void)
   MX_USART1_UART_Init();
   MX_I2C1_Init();
   /* USER CODE BEGIN 2 */
+  rgb_ball_init();
+    uint8_t mode = rgb_ball_read_jumpers();
+
+    switch (mode) {
+  	case 0:
+  		rgb_ball_blink(1);
+  		rgb_ball_rainbow_fade();
+  		break;
+  	case 1:
+  		rgb_ball_blink(2);
+  		rgb_ball_christmas_color_fade();
+  		break;
+  	case 2:
+  		rgb_ball_blink(3);
+  		//rgb_ball_sun_storm();
+  		sunstorm_cycle();
+  		break;
+  	default:
+  		break;
+  }
+
+    // never get here!
 
   /* USER CODE END 2 */
 
@@ -113,9 +129,6 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-	  for(uint8_t i; i<124; i++){
-		  reserve_some_memory[i].b = i;
-	  }
   }
   /* USER CODE END 3 */
 }
