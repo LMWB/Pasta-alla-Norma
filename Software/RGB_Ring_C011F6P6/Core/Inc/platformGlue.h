@@ -29,9 +29,9 @@
 #define DEVICE_TIMEOUT                  HAL_TIMEOUT
 
 /* *** GPIO *************************************************************************** */
-#define LED1_ON() 					() // there is no LED on the rgb_ball_board
-#define LED1_OFF()					()
-#define LED1_TOGGLE()				()
+#define LED1_ON() 					__NOP() // there is no LED on the rgb_ball_board
+#define LED1_OFF()					__NOP()
+#define LED1_TOGGLE()				__NOP()
 
 #define TOGGLE_HEARTBEAT_LED()		LED1_TOGGLE()
 
