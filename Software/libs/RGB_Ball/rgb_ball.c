@@ -137,7 +137,7 @@ void rgb_ball_rainbow_fade(void) {
 		FSM[z0].callback(FSM[z0].color_start, FSM[z0].color_stop, i++);
 
 		send_to_led(&gamma_corrected);
-		HAL_GPIO_TogglePin(Onboard_LED_GPIO_Port, Onboard_LED_Pin);
+		LED1_TOGGLE();
 		DELAY(delay_ms);
 	}
 }
@@ -217,7 +217,7 @@ void rgb_ball_christmas_color_fade(void) {
 		FSM[z0].callback( FSM[z0].color_start, FSM[z0].color_stop, i++);
 
 		send_to_led(&gamma_corrected);
-		HAL_GPIO_TogglePin(Onboard_LED_GPIO_Port, Onboard_LED_Pin);
+		LED1_TOGGLE();
 		DELAY(delay_ms);
 	}
 }
@@ -248,7 +248,7 @@ void fade_between(const pixel_t* a, const pixel_t* b, uint8_t steps, uint16_t ba
 
         apply_gamma_and_brightness(&mixed, flicker, &gamma_corrected);
         send_to_led(&gamma_corrected);
-        HAL_GPIO_TogglePin(Onboard_LED_GPIO_Port, Onboard_LED_Pin);
+        LED1_TOGGLE();
 
         // random delay variation (±30%)
         uint16_t flicker_delay = base_delay_ms + (rand() % (base_delay_ms / 2)) - (base_delay_ms / 4);
@@ -319,7 +319,7 @@ void rgb_ball_sun_storm(void){
 		FSM[z0].callback( FSM[z0].color_start, FSM[z0].color_stop, i++);
 
 		send_to_led(&gamma_corrected);
-		HAL_GPIO_TogglePin(Onboard_LED_GPIO_Port, Onboard_LED_Pin);
+		LED1_TOGGLE();
 		DELAY(delay_ms);
 	}
 }
@@ -377,7 +377,7 @@ void rgb_ball_daylight(void){
 		FSM[z0].callback( FSM[z0].color_start, FSM[z0].color_stop, i++);
 
 		send_to_led(&gamma_corrected);
-		HAL_GPIO_TogglePin(Onboard_LED_GPIO_Port, Onboard_LED_Pin);
+		LED1_TOGGLE();
 		DELAY(delay_ms);
 	}
 }
@@ -446,10 +446,10 @@ void rgb_ball_main(void) {
 				icled_set_color(&gamma_corrected, j);
 			}
 			icled_write_pixel_buffer_to_pwm();
-			HAL_GPIO_TogglePin(Onboard_LED_GPIO_Port, Onboard_LED_Pin);
+			LED1_TOGGLE();
 		} else {
 			send_to_led(&gamma_corrected);
-			HAL_GPIO_TogglePin(Onboard_LED_GPIO_Port, Onboard_LED_Pin);
+			LED1_TOGGLE();
 		}
 		/* this is the speed of fade progress */
 		DELAY(delay_ms);
