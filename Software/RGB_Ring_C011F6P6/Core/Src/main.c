@@ -27,13 +27,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-typedef struct __myType{
-	uint8_t r;
-	uint8_t g;
-	uint8_t b;
-}myType;
-
-static myType reserve_some_memory[1024];
+#include "RGB_Ball/rgb_ball.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -113,9 +107,6 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-	  for(uint8_t i; i<124; i++){
-		  reserve_some_memory[i].b = i;
-	  }
   }
   /* USER CODE END 3 */
 }

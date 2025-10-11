@@ -2,7 +2,7 @@
 #define HARDWARE_GLOBAL_H
 
 
-#define PLATFORM_STM32C031
+#define PLATFORM_STM32C011
 
 #define HAS_UART
 #define HAS_TIMER
@@ -29,9 +29,9 @@
 #define DEVICE_TIMEOUT                  HAL_TIMEOUT
 
 /* *** GPIO *************************************************************************** */
-#define LED1_ON() 					HAL_GPIO_WritePin(	Onboard_LED_GPIO_Port, Onboard_LED_Pin, GPIO_PIN_SET)
-#define LED1_OFF()					HAL_GPIO_WritePin(	Onboard_LED_GPIO_Port, Onboard_LED_Pin, GPIO_PIN_RESET)
-#define LED1_TOGGLE()				HAL_GPIO_TogglePin(	Onboard_LED_GPIO_Port, Onboard_LED_Pin)
+#define LED1_ON() 					() // there is no LED on the rgb_ball_board
+#define LED1_OFF()					()
+#define LED1_TOGGLE()				()
 
 #define TOGGLE_HEARTBEAT_LED()		LED1_TOGGLE()
 
@@ -43,8 +43,8 @@
 /* *** UART *************************************************************************** */
 #ifdef HAS_UART
 #include "usart.h"
-#define UART_TERMINAL_HANDLER 	            		huart2
-#define UART_TERMINAL_INSTANCE 	            		USART2
+#define UART_TERMINAL_HANDLER 	            		huart1
+#define UART_TERMINAL_INSTANCE 	            		USART1
 #define UART_TERMINAL_SEND(string, size)    		HAL_UART_Transmit(&UART_TERMINAL_HANDLER, string, size, HAL_MAX_DELAY)
 
 //#define UART_TERMINAL_READ_BYTE_IRQ(buffer)		HAL_UART_Receive_IT(&UART_TERMINAL_HANDLER, buffer, 1)
