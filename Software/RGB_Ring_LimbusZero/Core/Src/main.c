@@ -102,18 +102,18 @@ int main(void)
   uint8_t mode = rgb_ball_read_jumpers();
 
   switch (mode) {
-	case 0:
-		rgb_ball_blink(1);
-		rgb_ball_rainbow_fade();
-		break;
 	case 1:
+		rgb_ball_blink(1);
+		sunstorm_cycle();
+
+		break;
+	case 2:
 		rgb_ball_blink(2);
 		rgb_ball_christmas_color_fade();
 		break;
-	case 2:
+	case 3:
 		rgb_ball_blink(3);
-		//rgb_ball_sun_storm();
-		sunstorm_cycle();
+		rgb_ball_rainbow_fade();
 		break;
 	default:
 		break;
