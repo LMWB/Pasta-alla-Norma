@@ -10,7 +10,7 @@
 #define LOW 			19
 #define RESET 			0
 
-#define START_OFFSET 	100
+#define START_OFFSET 	0
 #define RESET_OFFSET 	100
 
 #define PWM_FRAME_SIZE (BITS_PER_ICLED * MAX_NO_OF_LEDS + START_OFFSET + RESET_OFFSET)
