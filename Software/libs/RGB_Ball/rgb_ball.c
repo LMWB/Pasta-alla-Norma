@@ -253,7 +253,6 @@ void fade_between(const pixel_t* a, const pixel_t* b, uint8_t steps, uint16_t ba
         //uint8_t flicker = 200 + (rand() % 56);  // 200–255
         uint8_t flicker = 180 + (rand() % 76);  // 180–255
 
-
         apply_gamma_and_brightness(&mixed, flicker, &gamma_corrected);
         send_to_led(&gamma_corrected);
         LED1_TOGGLE();

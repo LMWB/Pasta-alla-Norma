@@ -28,8 +28,8 @@ static pixel_t single_wire_LED_buffer[MAX_NO_OF_LEDS];
 uint16_t dma_buffer[SPI_LENGTH * SPI_NO_OF_LEDS + 1] = { 0 };
 
 
-
-// gamma correction look up table created with python script (tools folder)
+// GAMMA CORRECTION LOOK UP TABLE
+// created with python script (tools folder)
 static uint8_t gamma_table[256] = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1,
 		1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5, 6, 6,
 		6, 6, 7, 7, 7, 8, 8, 8, 9, 9, 9, 10, 10, 11, 11, 11, 12, 12, 13, 13, 13, 14, 14, 15,
@@ -52,25 +52,6 @@ void icled_send_bit_stream_spi(uint8_t* bit_buffer, uint16_t length){
 	HAL_SPI_Transmit(&hspi1, bit_buffer, length, 500); // without DMA
 	//HAL_SPI_Transmit_DMA(&hspi1, bit_buffer, length); // with DMA
 }
-
-// brightness: 0 (off) to 255 (full brightness)
-//uint8_t icled_apply_brightness(uint16_t position, uint8_t brightness) {
-//	if (position > MAX_NO_OF_LEDS) {
-//		return 0;
-//	} else{
-//		single_wire_LED_buffer[position].B = (uint8_t)((single_wire_LED_buffer[position].B * (uint16_t)brightness) / 255);
-//		single_wire_LED_buffer[position].G = (uint8_t)((single_wire_LED_buffer[position].G * (uint16_t)brightness) / 255);
-//		single_wire_LED_buffer[position].R = (uint8_t)((single_wire_LED_buffer[position].R * (uint16_t)brightness) / 255);
-//    return 1;
-//	}
-//}
-
-//// brightness: 0–255
-//void apply_gamma_and_brightness(pixel_t* base_color, uint8_t brightness, pixel_t* result_color) {
-//    result_color->R = (uint8_t)((gamma_table[base_color->R] * (uint16_t)brightness) / 255);
-//    result_color->G = (uint8_t)((gamma_table[base_color->G] * (uint16_t)brightness) / 255);
-//    result_color->B = (uint8_t)((gamma_table[base_color->B] * (uint16_t)brightness) / 255);
-//}
 
 // t: 0..255 blend fraction (0 = a, 255 = b)
 // brightness: 0..255 brightness in linear space
