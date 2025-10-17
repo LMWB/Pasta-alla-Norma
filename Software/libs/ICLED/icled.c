@@ -6,24 +6,24 @@
 /* WE ICLED PWM */
 #define BITS_PER_ICLED 	24
 
-#define HIGH 			40-2 // 40-2 for AZ-Delivery, 40-0 for WE
-#define LOW 			20-2 // 20-2 for AZ-Delivery, 20-0 for WE
+#define HIGH 			38
+#define LOW 			19
 #define RESET 			0
 
-#define START_OFFSET 	85 //40-2	//85
-#define RESET_OFFSET 	85 //20-2	//85
+#define START_OFFSET 	100
+#define RESET_OFFSET 	100
 
 #define PWM_FRAME_SIZE (BITS_PER_ICLED * MAX_NO_OF_LEDS + START_OFFSET + RESET_OFFSET)
 static pixel_t single_wire_LED_buffer[MAX_NO_OF_LEDS];
 
 /* WE ICLED SPI */
-#define SPI_LOW		0xC000
+#define SPI_LOW		0xF000
 #define SPI_HIGH	0xFF00
 #define SPI_RESET	0x0000
 
-#define SPI_NO_OF_LEDS			8
+#define SPI_NO_OF_LEDS			MAX_NO_OF_LEDS
 #define SPI_BIT_PER_LED			24
-#define SPI_NO_OF_RESET_FRAMES	4
+#define SPI_NO_OF_RESET_FRAMES	3
 #define SPI_LENGTH				(SPI_NO_OF_LEDS * SPI_BIT_PER_LED + SPI_NO_OF_RESET_FRAMES)
 uint16_t dma_buffer[SPI_LENGTH * SPI_NO_OF_LEDS + 1] = { 0 };
 
@@ -187,40 +187,40 @@ void neopixel_duplicate_bit_pattern(uint16_t *bit_buffer_single_neopixel, uint16
 
 
 /* this one works for PWM */
-//uint8_t icled_write_pixel_buffer_to_pwm(void){
-//	uint16_t pwm_dma_buffer[PWM_FRAME_SIZE] = { 0 }; 	// buffer to send to ICLED
-//	uint16_t bit_buffer[BITS_PER_ICLED] = { 0 };		// working buffer to convert RGB-Color to ICLED Bit Frame
-//
-//	/* convert one RGB-color to bit pattern and place it in the bit buffer that holds the total */
-//	for(uint_fast16_t k = 0; k < MAX_NO_OF_LEDS; ++k)
-//	{
-//		icled_convert_RGB_to_bit_code(single_wire_LED_buffer[k], bit_buffer);
-//		icled_convert_bool_to_pwm_frame(bit_buffer, BITS_PER_ICLED);
-//		memcpy(&pwm_dma_buffer[RESET_OFFSET + k * BITS_PER_ICLED], bit_buffer, BITS_PER_ICLED * 2);
-//	}
-//	icled_send_bit_stream_pwm((uint32_t*) pwm_dma_buffer, PWM_FRAME_SIZE);
-//	DELAY(10);
-//	return 1;
-//}
-
-/* this one works for SPI */
 uint8_t icled_write_pixel_buffer_to_pwm(void){
-
-	uint16_t bit_buffer[SPI_LENGTH] = { 0 };			// working buffer to convert RGB-Color to ICLED Bit Frame
-	uint16_t neopixel_spi_buffer[SPI_LENGTH] = {SPI_RESET};
+	uint16_t pwm_dma_buffer[PWM_FRAME_SIZE] = { 0 }; 	// buffer to send to ICLED
+	uint16_t bit_buffer[BITS_PER_ICLED] = { 0 };		// working buffer to convert RGB-Color to ICLED Bit Frame
 
 	/* convert one RGB-color to bit pattern and place it in the bit buffer that holds the total */
 	for(uint_fast16_t k = 0; k < MAX_NO_OF_LEDS; ++k)
 	{
 		icled_convert_RGB_to_bit_code(single_wire_LED_buffer[k], bit_buffer);
-		//icled_convert_bool_to_pwm_frame(bit_buffer, BITS_PER_ICLED);
-		neopixel_convert_bool_to_spi_frame(bit_buffer, SPI_LENGTH);
-		//memcpy(&pwm_dma_buffer[RESET_OFFSET + k * BITS_PER_ICLED], bit_buffer, BITS_PER_ICLED * 2);
+		icled_convert_bool_to_pwm_frame(bit_buffer, BITS_PER_ICLED);
+		memcpy(&pwm_dma_buffer[RESET_OFFSET + k * BITS_PER_ICLED], bit_buffer, BITS_PER_ICLED * 2);
 	}
-
-	neopixel_duplicate_bit_pattern(bit_buffer, &neopixel_spi_buffer[3], SPI_NO_OF_LEDS);
-
-	icled_send_bit_stream_spi((uint32_t*) neopixel_spi_buffer, SPI_LENGTH);
+	icled_send_bit_stream_pwm((uint32_t*) pwm_dma_buffer, PWM_FRAME_SIZE);
 	DELAY(10);
 	return 1;
 }
+
+/* this one works for SPI */
+//uint8_t icled_write_pixel_buffer_to_pwm(void){
+//
+//	uint16_t bit_buffer[SPI_LENGTH] = { 0 };			// working buffer to convert RGB-Color to ICLED Bit Frame
+//	uint16_t neopixel_spi_buffer[SPI_LENGTH] = {SPI_RESET};
+//
+//	/* convert one RGB-color to bit pattern and place it in the bit buffer that holds the total */
+//	for(uint_fast16_t k = 0; k < MAX_NO_OF_LEDS; ++k)
+//	{
+//		icled_convert_RGB_to_bit_code(single_wire_LED_buffer[k], bit_buffer);
+//		//icled_convert_bool_to_pwm_frame(bit_buffer, BITS_PER_ICLED);
+//		neopixel_convert_bool_to_spi_frame(bit_buffer, SPI_LENGTH);
+//		//memcpy(&pwm_dma_buffer[RESET_OFFSET + k * BITS_PER_ICLED], bit_buffer, BITS_PER_ICLED * 2);
+//	}
+//
+//	neopixel_duplicate_bit_pattern(bit_buffer, &neopixel_spi_buffer[SPI_NO_OF_RESET_FRAMES], SPI_NO_OF_LEDS);
+//
+//	icled_send_bit_stream_spi( (uint8_t*) neopixel_spi_buffer, SPI_LENGTH);
+//	DELAY(10);
+//	return 1;
+//}

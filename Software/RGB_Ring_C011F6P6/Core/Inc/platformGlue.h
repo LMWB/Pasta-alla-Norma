@@ -7,7 +7,7 @@
 //#define HAS_UART
 #define HAS_TIMER
 //#define HAS_I2C
-//#define HAS_SPI
+#define HAS_SPI
 //#define HAS_WATCHDOG
 //#define HAS_CAN
 //#define PLATFORM_HAS_RTC
