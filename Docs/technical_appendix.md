@@ -22,7 +22,7 @@ This section provides essential hardware and configuration information for users
 | Parameter | Specification |
 |------------|----------------|
 | **Input Voltage** | 5 V DC via USB-C |
-| **Typical Current** | 40 – 120 mA (depending on brightness and color) |
+| **Typical Current** | 50 – 200 mA (depending on brightness and color) |
 | **Connector** | USB-C, reversible plug |
 | **Polarity Protection** | Built-in |
 
@@ -68,5 +68,5 @@ Documentation: **October 2025**
 
 ---
 
-### © 2025 Aurora Design Labs  
+### © 2025 calogizer electronic engineering  
 Crafted with care — engineered for light.
