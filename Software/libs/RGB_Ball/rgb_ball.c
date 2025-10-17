@@ -24,55 +24,63 @@ void fade_colors( pixel_t* color_start, pixel_t* color_stop, uint8_t fade_progre
 }
 
 void rgb_ball_all_on(void){
-	icled_set_color(&white, 0);
-	icled_set_color(&white, 1);
+//	icled_set_color(&white, 0);
+//	icled_set_color(&white, 1);
+//
+//	icled_set_color(&black, 2);
+//
+//	icled_set_color(&white, 3);
+//	icled_set_color(&white, 4);
+//
+//	icled_set_color(&black, 5);
+//
+//	icled_set_color(&white, 6);
+//	icled_set_color(&white, 7);
+//
+//	icled_set_color(&black, 8);
+//
+//	icled_set_color(&white, 9);
+//	icled_set_color(&white, 10);
+//
+//	icled_set_color(&black, 11);
 
-	icled_set_color(&black, 2);
-
-	icled_set_color(&white, 3);
-	icled_set_color(&white, 4);
-
-	icled_set_color(&black, 5);
-
-	icled_set_color(&white, 6);
-	icled_set_color(&white, 7);
-
-	icled_set_color(&black, 8);
-
-	icled_set_color(&white, 9);
-	icled_set_color(&white, 10);
-
-	icled_set_color(&black, 11);
+	for (uint_fast8_t j = 0; j < MAX_NO_OF_LEDS; j++) {
+		icled_set_color(&white, j);
+	}
 	icled_write_pixel_buffer_to_pwm();
 }
 
 void rgb_ball_all_off(void){
 	for (uint_fast8_t j = 0; j < MAX_NO_OF_LEDS; j++) {
-		icled_set_color(&gamma_corrected, j);
+		icled_set_color(&black, j);
 	}
 	icled_write_pixel_buffer_to_pwm();
 }
 
 void send_to_led(pixel_t* color){
 	/* copy one pixel to specific positions only and fire the pwm  */
-	icled_set_color(color, 0);
-	icled_set_color(color, 1);
-	icled_set_color(&black, 2);
-	icled_set_color(color, 3);
-	icled_set_color(color, 4);
-	icled_set_color(&black, 5);
-	icled_set_color(color, 6);
-	icled_set_color(color, 7);
-	icled_set_color(&black, 8);
-	icled_set_color(color, 9);
-	icled_set_color(color, 10);
-	icled_set_color(&black, 11);
+//	icled_set_color(color, 0);
+//	icled_set_color(color, 1);
+//	icled_set_color(&black, 2);
+//	icled_set_color(color, 3);
+//	icled_set_color(color, 4);
+//	icled_set_color(&black, 5);
+//	icled_set_color(color, 6);
+//	icled_set_color(color, 7);
+//	icled_set_color(&black, 8);
+//	icled_set_color(color, 9);
+//	icled_set_color(color, 10);
+//	icled_set_color(&black, 11);
+
+	for (uint_fast8_t j = 0; j < MAX_NO_OF_LEDS; j++) {
+		icled_set_color(color, j);
+	}
 	icled_write_pixel_buffer_to_pwm();
 }
 
 void rgb_ball_init(void){
-	// pull output 1 high to have something to read from IN1 and IN2
-	WRITE_PIN(OUT1_GPIO_Port, OUT1_Pin, 1);
+	// pull output 1 low to have something to read from IN1 and IN2
+	WRITE_PIN(OUT1_GPIO_Port, OUT1_Pin, 0);
 	rgb_ball_all_off();
 	DELAY(200);
 }

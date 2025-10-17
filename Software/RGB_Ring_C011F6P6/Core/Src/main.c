@@ -1,28 +1,25 @@
 /* USER CODE BEGIN Header */
 /**
-  ******************************************************************************
-  * @file           : main.c
-  * @brief          : Main program body
-  ******************************************************************************
-  * @attention
-  *
-  * Copyright (c) 2025 STMicroelectronics.
-  * All rights reserved.
-  *
-  * This software is licensed under terms that can be found in the LICENSE file
-  * in the root directory of this software component.
-  * If no LICENSE file comes with this software, it is provided AS-IS.
-  *
-  ******************************************************************************
-  */
+ ******************************************************************************
+ * @file           : main.c
+ * @brief          : Main program body
+ ******************************************************************************
+ * @attention
+ *
+ * Copyright (c) 2025 STMicroelectronics.
+ * All rights reserved.
+ *
+ * This software is licensed under terms that can be found in the LICENSE file
+ * in the root directory of this software component.
+ * If no LICENSE file comes with this software, it is provided AS-IS.
+ *
+ ******************************************************************************
+ */
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "dma.h"
-#include "i2c.h"
-#include "spi.h"
 #include "tim.h"
-#include "usart.h"
 #include "gpio.h"
 
 /* Private includes ----------------------------------------------------------*/
@@ -93,43 +90,40 @@ int main(void)
   MX_GPIO_Init();
   MX_DMA_Init();
   MX_TIM1_Init();
-  MX_SPI1_Init();
-  MX_USART1_UART_Init();
-  MX_I2C1_Init();
   /* USER CODE BEGIN 2 */
-  rgb_ball_init();
-    uint8_t mode = rgb_ball_read_jumpers();
 
-    switch (mode) {
-  	case 0:
-  		rgb_ball_blink(1);
-  		rgb_ball_rainbow_fade();
-  		break;
-  	case 1:
-  		rgb_ball_blink(2);
-  		rgb_ball_christmas_color_fade();
-  		break;
-  	case 2:
-  		rgb_ball_blink(3);
-  		//rgb_ball_sun_storm();
-  		sunstorm_cycle();
-  		break;
-  	default:
-  		break;
-  }
+	rgb_ball_init();
+	uint8_t mode = rgb_ball_read_jumpers();
 
-    // never get here!
+	switch (mode) {
+	case 1:
+		rgb_ball_blink(1);
+		//rgb_ball_sun_storm();
+		sunstorm_cycle();
+		break;
+	case 2:
+		rgb_ball_blink(2);
+		rgb_ball_christmas_color_fade();
+		break;
+	case 3:
+		rgb_ball_blink(3);
+		rgb_ball_rainbow_fade();
+		break;
+	default:
+		break;
+	}
+
+	// never get here!
 
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  while (1)
-  {
+	while (1) {
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-  }
+	}
   /* USER CODE END 3 */
 }
 
@@ -142,14 +136,14 @@ void SystemClock_Config(void)
   RCC_OscInitTypeDef RCC_OscInitStruct = {0};
   RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
 
-  __HAL_FLASH_SET_LATENCY(FLASH_LATENCY_0);
+  __HAL_FLASH_SET_LATENCY(FLASH_LATENCY_1);
 
   /** Initializes the RCC Oscillators according to the specified parameters
   * in the RCC_OscInitTypeDef structure.
   */
   RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSI;
   RCC_OscInitStruct.HSIState = RCC_HSI_ON;
-  RCC_OscInitStruct.HSIDiv = RCC_HSI_DIV4;
+  RCC_OscInitStruct.HSIDiv = RCC_HSI_DIV1;
   RCC_OscInitStruct.HSICalibrationValue = RCC_HSICALIBRATION_DEFAULT;
   if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
   {
@@ -165,7 +159,7 @@ void SystemClock_Config(void)
   RCC_ClkInitStruct.AHBCLKDivider = RCC_HCLK_DIV1;
   RCC_ClkInitStruct.APB1CLKDivider = RCC_APB1_DIV1;
 
-  if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_0) != HAL_OK)
+  if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_1) != HAL_OK)
   {
     Error_Handler();
   }
@@ -182,11 +176,10 @@ void SystemClock_Config(void)
 void Error_Handler(void)
 {
   /* USER CODE BEGIN Error_Handler_Debug */
-  /* User can add his own implementation to report the HAL error return state */
-  __disable_irq();
-  while (1)
-  {
-  }
+	/* User can add his own implementation to report the HAL error return state */
+	__disable_irq();
+	while (1) {
+	}
   /* USER CODE END Error_Handler_Debug */
 }
 #ifdef USE_FULL_ASSERT

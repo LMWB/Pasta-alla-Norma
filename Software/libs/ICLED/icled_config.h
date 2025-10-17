@@ -4,7 +4,7 @@
 #include <stdint.h>
 
 // Define the size of the ICLED array that is being used
-#define MAX_NO_OF_LEDS	12
+#define MAX_NO_OF_LEDS	8
 
 typedef struct {
 	uint8_t R;		// byte for color red
