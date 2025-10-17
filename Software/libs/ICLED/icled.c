@@ -186,40 +186,40 @@ void neopixel_duplicate_bit_pattern(uint16_t *bit_buffer_single_neopixel, uint16
 }
 
 /* this one works for PWM */
-//uint8_t icled_write_pixel_buffer_to_pwm(void){
-//	uint16_t pwm_dma_buffer[PWM_FRAME_SIZE] = { 0 }; 	// buffer to send to ICLED
-//	uint16_t bit_buffer[BITS_PER_ICLED] = { 0 };		// working buffer to convert RGB-Color to ICLED Bit Frame
-//
-//	/* convert one RGB-color to bit pattern and place it in the bit buffer that holds the total */
-//	for(uint_fast16_t k = 0; k < MAX_NO_OF_LEDS; ++k)
-//	{
-//		icled_convert_RGB_to_bit_code(single_wire_LED_buffer[k], bit_buffer);
-//		icled_convert_bool_to_pwm_frame(bit_buffer, BITS_PER_ICLED);
-//		memcpy(&pwm_dma_buffer[RESET_OFFSET + k * BITS_PER_ICLED], bit_buffer, BITS_PER_ICLED * 2);
-//	}
-//	icled_send_bit_stream_pwm((uint32_t*) pwm_dma_buffer, PWM_FRAME_SIZE);
-//	DELAY(10);
-//	return 1;
-//}
-
-/* this one works for SPI */
 uint8_t icled_write_pixel_buffer_to_pwm(void){
-
-	uint16_t bit_buffer[SPI_LENGTH] = { 0 };			// working buffer to convert RGB-Color to ICLED Bit Frame
-	uint16_t neopixel_spi_buffer[SPI_LENGTH] = {SPI_RESET};
+	uint16_t pwm_dma_buffer[PWM_FRAME_SIZE] = { 0 }; 	// buffer to send to ICLED
+	uint16_t bit_buffer[BITS_PER_ICLED] = { 0 };		// working buffer to convert RGB-Color to ICLED Bit Frame
 
 	/* convert one RGB-color to bit pattern and place it in the bit buffer that holds the total */
 	for(uint_fast16_t k = 0; k < MAX_NO_OF_LEDS; ++k)
 	{
 		icled_convert_RGB_to_bit_code(single_wire_LED_buffer[k], bit_buffer);
-		//icled_convert_bool_to_pwm_frame(bit_buffer, BITS_PER_ICLED);
-		neopixel_convert_bool_to_spi_frame(bit_buffer, SPI_LENGTH);
-		//memcpy(&pwm_dma_buffer[RESET_OFFSET + k * BITS_PER_ICLED], bit_buffer, BITS_PER_ICLED * 2);
+		icled_convert_bool_to_pwm_frame(bit_buffer, BITS_PER_ICLED);
+		memcpy(&pwm_dma_buffer[RESET_OFFSET + k * BITS_PER_ICLED], bit_buffer, BITS_PER_ICLED * 2);
 	}
-
-	neopixel_duplicate_bit_pattern(bit_buffer, &neopixel_spi_buffer[SPI_NO_OF_RESET_FRAMES], SPI_NO_OF_LEDS);
-
-	icled_send_bit_stream_spi( (uint8_t*) neopixel_spi_buffer, SPI_LENGTH);
+	icled_send_bit_stream_pwm((uint32_t*) pwm_dma_buffer, PWM_FRAME_SIZE);
 	DELAY(10);
 	return 1;
 }
+
+/* this one works for SPI */
+//uint8_t icled_write_pixel_buffer_to_pwm(void){
+//
+//	uint16_t bit_buffer[SPI_LENGTH] = { 0 };			// working buffer to convert RGB-Color to ICLED Bit Frame
+//	uint16_t neopixel_spi_buffer[SPI_LENGTH] = {SPI_RESET};
+//
+//	/* convert one RGB-color to bit pattern and place it in the bit buffer that holds the total */
+//	for(uint_fast16_t k = 0; k < MAX_NO_OF_LEDS; ++k)
+//	{
+//		icled_convert_RGB_to_bit_code(single_wire_LED_buffer[k], bit_buffer);
+//		//icled_convert_bool_to_pwm_frame(bit_buffer, BITS_PER_ICLED);
+//		neopixel_convert_bool_to_spi_frame(bit_buffer, SPI_LENGTH);
+//		//memcpy(&pwm_dma_buffer[RESET_OFFSET + k * BITS_PER_ICLED], bit_buffer, BITS_PER_ICLED * 2);
+//	}
+//
+//	neopixel_duplicate_bit_pattern(bit_buffer, &neopixel_spi_buffer[SPI_NO_OF_RESET_FRAMES], SPI_NO_OF_LEDS);
+//
+//	icled_send_bit_stream_spi( (uint8_t*) neopixel_spi_buffer, SPI_LENGTH);
+//	DELAY(10);
+//	return 1;
+//}
