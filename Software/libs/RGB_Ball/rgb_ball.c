@@ -59,19 +59,6 @@ void rgb_ball_all_off(void){
 
 void send_to_led(pixel_t* color){
 	/* copy one pixel to specific positions only and fire the pwm  */
-//	icled_set_color(color, 0);
-//	icled_set_color(color, 1);
-//	icled_set_color(&black, 2);
-//	icled_set_color(color, 3);
-//	icled_set_color(color, 4);
-//	icled_set_color(&black, 5);
-//	icled_set_color(color, 6);
-//	icled_set_color(color, 7);
-//	icled_set_color(&black, 8);
-//	icled_set_color(color, 9);
-//	icled_set_color(color, 10);
-//	icled_set_color(&black, 11);
-
 	for (uint_fast8_t j = 0; j < MAX_NO_OF_LEDS; j++) {
 		icled_set_color(color, j);
 	}
@@ -382,6 +369,64 @@ void rgb_ball_daylight(void){
 
 		// execute function belonging to the new state
 		FSM[z0].callback( FSM[z0].color_start, FSM[z0].color_stop, i++);
+
+		send_to_led(&gamma_corrected);
+		LED1_TOGGLE();
+		DELAY(delay_ms);
+	}
+}
+
+/*
+ * So erzählst du eine kleine Geschichte:
+ * 🥒 Pickle Green: Die Gurke lebt.
+ * 🌿 Soft Green: Sie träumt davon, ein Kürbis zu sein.
+ * 🎃 Pumpkin Orange: Sie versucht, sich zu verwandeln.
+ * 🔥 Glowing/Angry Red: Es klappt nicht – sie wird wütend!
+ * 🌑 Dark Return: Sie beruhigt sich… und der Zyklus beginnt von vorn.
+ *
+ * 💡 Empfohlene Fade-Reihenfolge:
+ * pickle_green → soft_green → pumpkin_orange → glowing_red → angry_red → dark_return → pickle_green
+ */
+void Haunted_Pickle(void) {
+
+	// "Haunted Pickle" Halloween Palette
+	pixel_t pickle_green 	= { .R = 40, .G = 180, .B = 60 }; 	// kräftiges, saftiges Gurkengrün
+	pixel_t soft_green 		= { .R = 100, .G = 220, .B = 100 }; // zartes, fast freundliches Grün
+	pixel_t pumpkin_orange 	= { .R = 255, .G = 120, .B = 30 }; 	// klassisches Halloween-Kürbis-Orange
+	pixel_t angry_red 		= { .R = 255, .G = 30, .B = 20 }; 	// wütendes, heißes Rot
+	pixel_t glowing_red 	= { .R = 255, .G = 80, .B = 60 }; 	// glühend – wie brodelnde Emotion
+	pixel_t dark_return 	= { .R = 10, .G = 70, .B = 20 }; 	// schattiges Grün, Nachtmodus
+
+	uint8_t z0 = 0;
+	uint8_t z1 = 0;
+	uint8_t input_vector = 0;
+	rgb_fsm_t FSM[] = {
+			{ &pickle_green, 	&soft_green, 	{ 255, 1 }, fade_colors }, // 255 = stay, !255 = new state
+			{ &soft_green,		&pumpkin_orange,{ 255, 2 }, fade_colors },
+			{ &pumpkin_orange, 	&angry_red, 	{ 255, 3 }, fade_colors },
+			{ &angry_red, 		&glowing_red, 	{ 255, 4 }, fade_colors },
+			{ &glowing_red, 	&dark_return, 	{ 255, 5 }, fade_colors },
+			{ &dark_return, 	&pickle_green, 	{ 255, 0 }, fade_colors },
+	};
+
+	uint8_t i = 1;
+	while (1) {
+		if (i == 0) {
+			input_vector = 1;
+		} else {
+			input_vector = 0;
+		}
+
+		// read new state according to progress iteration
+		z1 = FSM[z0].next_state[input_vector];
+
+		// switch to next state if not STAY
+		if (z1 != 255) {
+			z0 = z1;
+		}
+
+		// execute function belonging to the new state
+		FSM[z0].callback(FSM[z0].color_start, FSM[z0].color_stop, i++);
 
 		send_to_led(&gamma_corrected);
 		LED1_TOGGLE();

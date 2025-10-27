@@ -104,8 +104,7 @@ int main(void)
   switch (mode) {
 	case 1:
 		rgb_ball_blink(1);
-		sunstorm_cycle();
-
+		Haunted_Pickle();
 		break;
 	case 2:
 		rgb_ball_blink(2);

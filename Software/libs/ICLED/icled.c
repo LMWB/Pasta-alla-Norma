@@ -71,8 +71,8 @@ void blend_and_dim_to_linear(pixel_t *x, pixel_t *y, uint8_t t, uint8_t brightne
     uint32_t b = ((uint32_t)(255 - t) * b1 + (uint32_t)t * b2 + 127) / 255;
 
     // apply global brightness (in linear)
-    r  = (r  * brightness + 127) / 255;
-    g  = (g  * brightness + 127) / 255;
+    r = (r * brightness + 127) / 255;
+    g = (g * brightness + 127) / 255;
     b = (b * brightness + 127) / 255;
 
     // clamp (probably unnecessary but safe)
