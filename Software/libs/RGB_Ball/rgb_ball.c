@@ -1,4 +1,5 @@
-#include "platformGlue.h"
+#include "rgb_ball.h"
+
 #include "ICLED/icled.h"
 #include "ICLED/icled_config.h"
 

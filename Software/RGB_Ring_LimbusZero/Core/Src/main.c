@@ -104,14 +104,17 @@ int main(void)
   switch (mode) {
 	case 1:
 		rgb_ball_blink(1);
+		DELAY(500);
 		Haunted_Pickle();
 		break;
 	case 2:
 		rgb_ball_blink(2);
+		DELAY(500);
 		rgb_ball_christmas_color_fade();
 		break;
 	case 3:
 		rgb_ball_blink(3);
+		DELAY(500);
 		rgb_ball_rainbow_fade();
 		break;
 	default:

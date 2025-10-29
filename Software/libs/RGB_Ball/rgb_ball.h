@@ -1,7 +1,7 @@
 #ifndef RGB_BALL_RGB_BALL_H_
 #define RGB_BALL_RGB_BALL_H_
 
-#include "rgb_ball.h"
+#include "platformGlue.h"
 
 void rgb_ball_init(void);
 uint8_t rgb_ball_read_jumpers(void);
