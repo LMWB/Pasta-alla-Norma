@@ -79,7 +79,8 @@ void send_to_led(pixel_t* color){
 }
 
 void rgb_ball_init(void){
-	// pull output 1 low to have something to read from IN1 and IN2
+	// pull output low, it's got external pull-up
+	// pin IN1 & IN2 will be turned high with jumper position
 	WRITE_PIN(OUT1_GPIO_Port, OUT1_Pin, 0);
 	rgb_ball_all_off();
 	DELAY(200);

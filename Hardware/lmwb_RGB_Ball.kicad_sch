@@ -3213,6 +3213,7 @@
 			(font
 				(size 1.27 1.27)
 			)
+			(justify left)
 		)
 		(uuid "bfc3927c-8a6d-4b6f-b2e8-56ca7303fbd3")
 	)
